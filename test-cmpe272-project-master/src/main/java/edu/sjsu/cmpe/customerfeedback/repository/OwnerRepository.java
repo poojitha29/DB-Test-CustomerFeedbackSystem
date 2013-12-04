@@ -10,21 +10,14 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 
 import edu.sjsu.cmpe.customerfeedback.domain.Owner;
-//import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class OwnerRepository implements OwnerRepositoryInterface {
 	
-	//private final ConcurrentHashMap<Integer, Owner> ownerInMemoryMap;
-	private int ownerId;
+		private int ownerId;
 	
-	/*public OwnerRepository() {
-		checkNotNull(concurrentHashMap, "ownerMap must not be NULL");
-		ownerInMemoryMap = concurrentHashMap;
-		ownerId = 0;		
-	}*/
-	public OwnerRepository(){}
+		public OwnerRepository(){}
 	
 	private final int generateOwnerId()	{
 		return ++ownerId;
@@ -58,11 +51,5 @@ public class OwnerRepository implements OwnerRepositoryInterface {
 		return null;
 	}
 
-	/*@Override
-	public Owner getOwnerbyOwnerID(int ownerId) {
-		checkArgument(ownerId>0,"ownerId was "+ownerId+", but expected a greater than zero value");
-		return ownerInMemoryMap.get(ownerId);
-		
-	}*/
-
+	
 }

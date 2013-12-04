@@ -41,11 +41,7 @@ public class ReviewRepository extends ReviewRepositoryInterface {
 	}
 	
 	 public void saveReview(Review newReview) {
-		//checkNotNull(newReview, "The Review cannot be null");
-		//int id = generateReviewId();
-		//newReview.setReviewId(id);
-		//reviewInMemoryMap.putIfAbsent(id, newReview);
-		try {
+				try {
 			MongoClient client = new MongoClient(new ServerAddress(	"localhost", 27017));
 			DB database = client.getDB("customerfeedback");
 			checkNotNull(newReview, "The Review cannot be null");
@@ -63,29 +59,11 @@ public class ReviewRepository extends ReviewRepositoryInterface {
 			BasicDBObject findProduct = new BasicDBObject();
 			findProduct.put("_id", ProductId); 
 						
-			/*BasicDBObject andQuery = new BasicDBObject();
-			List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
-			obj.add(new BasicDBObject("_id", newReview.getProductId()));
-			obj.add(new BasicDBObject("_id", newReview.getOwnerId()));
-			andQuery.put("$and", obj);
-		 		*/ 	
-		 	
-			//System.out.println(andQuery.toString());
-		 
-			
-			//BasicDBObject newdocument = new BasicDBObject().append("Products", new BasicDBObject("REviews", new BasicDBObject("Review", newReview.getReviewText()).append("_id", newReview.getProductId()).append("_id", newReview.getOwnerId())));
-			//BasicDBObject newdocument = new BasicDBObject("REviews", new BasicDBObject("Review", newReview.getReviewText()).append("_id", newReview.getProductId()).append("_id", newReview.getOwnerId()));
-			BasicDBObject newdocument = new BasicDBObject("REVIEW", new BasicDBObject("ReviewText", newReview.getReviewText()).append("ReviewId",id));
+						BasicDBObject newdocument = new BasicDBObject("REVIEW", new BasicDBObject("ReviewText", newReview.getReviewText()).append("ReviewId",id));
 			BasicDBObject reviewMode = new BasicDBObject();
 			reviewMode.put("$addToSet", newdocument);
 			collection.update(findProduct, reviewMode,true,false);
-			//collection.insert(newdocument);
-			
-			
-			//BasicDBObject document = new BasicDBObject().append("_id",newReview.getOwnerId());
-			//collection.updateMulti(newdocument,document);
-			//collection.insert(newdocument);
-			DBCursor cursor = collection.find();
+						DBCursor cursor = collection.find();
 			while (cursor.hasNext())
 				System.out.println(cursor.next());
 		} catch (Exception e) {

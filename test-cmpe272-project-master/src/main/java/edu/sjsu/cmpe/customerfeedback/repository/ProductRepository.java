@@ -30,12 +30,7 @@ public class ProductRepository implements ProductRepositoryInterface {
 	/**
 	 * 
 	 */
-	/*public ProductRepository(ConcurrentHashMap<Integer, Product> concurrentHashMap) {
-		checkNotNull(concurrentHashMap, "ownerMap must not be NULL");
-		productInMemoryMap = concurrentHashMap;
-		productId = 0;
-	}*/
-	public ProductRepository(){}
+		public ProductRepository(){}
 	private final int generateProductId() {
 		return ++productId;		
 	}
@@ -58,22 +53,13 @@ public class ProductRepository implements ProductRepositoryInterface {
 			
 			
 			BasicDBObject findOwner = new BasicDBObject();
-			findOwner.put("_id", OwnerId); // search query for the customer email
+			findOwner.put("_id", OwnerId); //Id can be replaced by email
 
-			// construct your newAddress object the same way you already are
-			//BasicDBObject newdocument = new BasicDBObject().append("Products", new BasicDBObject("_id",newProduct.getProductId()).append("ProductName", newProduct.getProductName()));
-			//BasicDBObject newdocument = new BasicDBObject().append("_id",newProduct.getProductId()).append("ProductName", newProduct.getProductName());
-			BasicDBObject newdocument = new BasicDBObject("_id",newProduct.getProductId()).append("ProductName", newProduct.getProductName()).append("OwnerId",OwnerId);
-			//BasicDBObject productMode = new BasicDBObject();
-			/*productMode.put("$addToSet", newdocument);
-			collection.update(findOwner, productMode, true /* upsert *///, false /* multi */ );*/
-			//collection.insert(productMode);
-			
-			
-			//BasicDBObject document = new BasicDBObject().append("_id",newProduct.getOwnerId());
-			//collection.updateMulti(newdocument,document);
+BasicDBObject("_id",newProduct.getProductId()).append("ProductName", newProduct.getProductName()));
+						BasicDBObject newdocument = new BasicDBObject("_id",newProduct.getProductId()).append("ProductName", newProduct.getProductName()).append("OwnerId",OwnerId);
 			collection.insert(newdocument);
-			/**to update Owner collection */
+			
+/**to update Owner collection */
 			DBCollection collection1 = database.getCollection("Owners");
 			
 			
@@ -81,20 +67,14 @@ public class ProductRepository implements ProductRepositoryInterface {
 			BasicDBObject productMode = new BasicDBObject();
 			productMode.put("$addToSet", updatedocument);
 			collection1.update(findOwner, productMode, true /* upsert */, false /* multi */ );
-			//collection.insert(productMode);
-			
-			
-			//BasicDBObject document = new BasicDBObject().append("_id",newProduct.getOwnerId());
-			//collection.updateMulti(newdocument,document);
-			collection.insert(newdocument);
-			DBCursor cursor = collection.find();
+				
+				DBCursor cursor = collection.find();
 			while (cursor.hasNext())
 				System.out.println(cursor.next());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		//productInMemoryMap.putIfAbsent(id, newProduct);
-		return newProduct;
+				return newProduct;
 	}
 
 	@Override
