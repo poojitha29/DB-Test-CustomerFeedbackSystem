@@ -1,3 +1,9 @@
+ # mongoHost: "localhost"
+ # mongoPort: 27017
+ # mongoDb: "customerfeedback"
+ # mongoUser: "spaark"
+ # mongoPassword: "spaark"
+
 
 # HTTP-specific options.
 http:
@@ -9,6 +15,8 @@ http:
 
   # The port on which the HTTP server listens for administrative requests.
   adminPort: 8081
+  
+
 
 # Logging settings.
 logging:

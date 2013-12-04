@@ -7,6 +7,8 @@ public interface OwnerRepositoryInterface {
 
 	
 	Owner saveOwner(Owner newOwner);
+
+	
 	
 	Owner getOwnerbyOwnerID(int OwnerId);
 }
